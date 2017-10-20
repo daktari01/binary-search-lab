@@ -7,8 +7,8 @@ toTwenty() returns [1, 2, 3 . . . 20]
 toForty() returns [2, 4, 6 . . . 40]
 
 toOneThousand() returns [10, 20, 30 . . . 1000]
-
-Once you are done, create another prototyped function called search, it will take just one argument which is the number you are to find. The search functon should return an object, which contains
+totyped function ca
+Once you are done, create another prolled search, it will take just one argument which is the number you are to find. The search functon should return an object, which contains
 
 .count, the number of times you function iterated to find the index of the number in question
 .index, the index of the number in question
