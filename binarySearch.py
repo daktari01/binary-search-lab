@@ -36,19 +36,21 @@ def search(num_to_find):
     #binary search engine    
     found = 0
     bottom = 0
+    count = 0
     top = len(num_list) - 1
     while bottom <= top and not found:
+        count += 1
         middle = (bottom + top) // 2
         if num_list[middle] == num_to_find:
             found = num_list.index(num_to_find)
             print("The number is on index %d" % found)
-            print("It took %d hops to find it" %found)
+            print("It took %d hops to find it" %count)
             print("Length of the original array is %d" %len(num_list))
         elif num_list[middle] < num_to_find:
             bottom = middle + 1
         else:
             top = middle - 1
-    search_dict = {'count': found, 'index': found} 
+    search_dict = {'count': count, 'index': found} 
     return search_dict
 
 '''def binarySearch():

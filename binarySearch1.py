@@ -1,4 +1,4 @@
-def one_to_twenty():
+def toTwenty():
     """Function to list numbers from 1-20"""
     num_list = []
     for i in range(1, 21):
@@ -6,14 +6,14 @@ def one_to_twenty():
     return num_list
 
 
-def two_to_forty():
+def toForty():
     """Function to list numbers from 2-40 at intervals of 2"""
     num_list = []
     for i in range(2, 41, 2):
         num_list.append(i)
     return num_list 
 
-def ten_to_thousand():
+def toOneThousand():
     """Function to list numbers from 10-1000 at intervals of 10"""
     num_list = []
     for i in range(10, 1001, 10):
@@ -22,29 +22,36 @@ def ten_to_thousand():
 
 
 def search(num_to_find):
+    search_dict = {}
     num_list = []
     if num_to_find in range(1, 21):
-        num_list = one_to_twenty()
+        num_list = toTwenty()
     elif num_to_find in range(2, 41, 2):
-        num_list = two_to_forty()
+        num_list = toForty()
     elif num_to_find in range(10, 1001, 10):
-        num_list = ten_to_thousand()
+        num_list = toOneThousand()
     else:
         print("The number you have entered is out of scope")
         
     #binary search engine    
-    found = False
+    found = 0
     bottom = 0
+    count = 0
     top = len(num_list) - 1
     while bottom <= top and not found:
+        count += 1
         middle = (bottom + top) // 2
         if num_list[middle] == num_to_find:
-            found = True
+            found = num_list.index(num_to_find)
+            print("The number is on index %d" % found)
+            print("It took %d hops to find it" %count)
+            print("Length of the original array is %d" %len(num_list))
         elif num_list[middle] < num_to_find:
             bottom = middle + 1
         else:
             top = middle - 1
-    return found 
+    search_dict = {'count': count, 'index': found} 
+    return search_dict
 
 '''def binarySearch():
     search(4)
