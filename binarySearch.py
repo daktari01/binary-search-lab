@@ -1,69 +1,66 @@
-def toTwenty():
-    """Function to list numbers from 1-20"""
-    num_list = []
-    for i in range(1, 21):
-        num_list.append(i)
-    return num_list
+class binarySearch(list):
+    """Class to execute the binary search"""
+    def __init__(self, list_max, step):
+        """Initialize the variables"""
+        self.list_max = list_max
+        self.step = step
+        #Finding which list to use
+        if self.list_max in self.toTwenty():
+            self.extend(self.toTwenty())
+        elif self.list_max in self.toForty():
+             self.extend(self.toForty())
+        elif self.list_max in self.toOneThousand():
+             self.extend(self.toOneThousand())
 
-
-def toForty():
-    """Function to list numbers from 2-40 at intervals of 2"""
-    num_list = []
-    for i in range(2, 41, 2):
-        num_list.append(i)
-    return num_list 
-
-def toOneThousand():
-    """Function to list numbers from 10-1000 at intervals of 10"""
-    num_list = []
-    for i in range(10, 1001, 10):
-        num_list.append(i)
-    return num_list
-
-
-def search(num_to_find):
-    search_dict = {}
-    num_list = []
-    if num_to_find in range(1, 21):
-        num_list = toTwenty()
-    elif num_to_find in range(2, 41, 2):
-        num_list = toForty()
-    elif num_to_find in range(10, 1001, 10):
-        num_list = toOneThousand()
-    else:
-        print("The number you have entered is out of scope")
-        
-    #binary search engine    
-    found = 0
-    bottom = 0
-    count = 0
-    top = len(num_list) - 1
-    while bottom <= top and not found:
-        count += 1
-        middle = (bottom + top) // 2
-        if num_list[middle] == num_to_find:
-            found = num_list.index(num_to_find)
-            print("The number is on index %d" % found)
-            print("It took %d hops to find it" %count)
-            print("Length of the original array is %d" %len(num_list))
-        elif num_list[middle] < num_to_find:
-            bottom = middle + 1
-        else:
-            top = middle - 1
-    search_dict = {'count': count, 'index': found} 
-    return search_dict
-
-'''def binarySearch():
-    search(4)
+        self.length = len(self)
+    
+    def toTwenty(self):
+        return range(self.step,(self.list_max * self.step)+1,self.step)
+    def toForty(self):
+        return range(self.step,(self.list_max * self.step)+1,self.step)
+    def toOneThousand(self):
+        return range(self.step,(self.list_max * self.step)+1,self.step)
+    '''
+    def toTwenty(self):
+        return range(1,21)
+    def toForty(self):
+        return range(2, 41, 2)
+    def toOneThousand(self):
+        return range(10, 1001, 10)
     '''
 
-if __name__ == "__main__":
-    #num_list = one_to_twenty()
-    num_to_find = int(input("Enter number to find:"))
-    is_found = search(num_to_find)
-    if is_found:
-        print("Yeah! Number found")
-    else:
-        print("The number you entered does not belong to list")
-    
+    def search(self, num_to_find):
+        bottom = 0
+        top = self.length-1
+        found = False
+        index = 0
+        counter = 0
+
+        if num_to_find == self[bottom]:
+            index = bottom
+            found = True
+        elif num_to_find == self[top]:
+            index = top
+            found = True
+        elif num_to_find not in self:
+            found = True
+            index = -1
+
+        while bottom <= top and not found:
+            midpoint = (bottom + top)//2 #split the list into two half 
+            # if number is equal to our middle term we return true
+            if self[midpoint] == num_to_find: 
+                found = True
+                index = midpoint
+            # else check if number is in lower or upper list and loop though again
+            else:
+                counter += 1
+                if num_to_find < self[midpoint]:
+                    top = midpoint-1
+                else:
+                    bottom = midpoint+1
+        return {'count': counter, 'index': index}  
+
+
+
     
